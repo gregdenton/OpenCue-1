@@ -1,0 +1,63 @@
+FROM opencue/rqd
+
+# Update [YOUR_BUCKET_NAME] with the name of your bucket in the following line:
+# This variable is referenced in rqd_startup.sh
+ENV GCS_FUSE_BUCKET pipeline-demo-files
+
+
+# This is the GCS bucket mount point on your Render Host. /shots is correct for this tutorial. Referenced in rqd_startup.sh
+ENV GCS_FUSE_MOUNT /shots
+
+# Create directory mount point
+RUN mkdir /shots
+RUN chmod 777 /shots
+
+# Install gcsfuse
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+COPY rqd/demo/install_gcsfuse.sh /opt/opencue/
+RUN chmod 777 /opt/opencue/install_gcsfuse.sh
+RUN /opt/opencue/install_gcsfuse.sh
+
+RUN yum update && \
+	yum install -y \
+		curl \
+		bzip2 \
+		libfreetype6 \
+		libgl1-mesa-dev \
+		libXi-devel  \
+		mesa-libGLU-devel \
+		zlib-devel \
+		libXinerama-devel \
+		libXrandr-devel \
+	yum -y autoremove && \
+	rm -rf /var/lib/apt/lists/*
+
+RUN yum -y install bzip2
+
+# Install blender
+ENV BLENDER_MAJOR 2.79
+ENV BLENDER_VERSION 2.79
+ENV BLENDER_BZ2_URL https://mirror.clarkson.edu/blender/release/Blender$BLENDER_MAJOR/blender-$BLENDER_VERSION-linux-glibc219-x86_64.tar.bz2
+
+RUN mkdir /usr/local/blender && \
+ curl -SL "$BLENDER_BZ2_URL" -o blender.tar.bz2 && \
+ tar -jxvf blender.tar.bz2 -C /usr/local/blender --strip-components=1 && \
+ rm blender.tar.bz2
+
+# Install ffmpeg
+RUN yum install -y wget
+RUN wget https://raw.githubusercontent.com/q3aql/ffmpeg-install/master/ffmpeg-install
+RUN chmod a+x ffmpeg-install
+RUN ./ffmpeg-install --install release
+
+# Test installs
+RUN ffmpeg -version
+RUN ln -s /usr/local/blender/blender /usr/local/bin/blender
+RUN blender --version
+
+COPY rqd/demo/rqd_startup.sh /opt/opencue
+RUN chmod 777 /opt/opencue/rqd_startup.sh
+
+ENV CUE_FRAME_LOG_DIR /shots/logs
+
+ENTRYPOINT ["/opt/opencue/rqd_startup.sh"]
