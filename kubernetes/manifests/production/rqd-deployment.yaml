@@ -25,7 +25,7 @@ spec:
       - env:
         - name: CUEBOT_HOSTNAME
           value: cuebot
-        image: gcr.io/opencue-dev/opencue/rqd-blender
+        image: gcr.io/opencue-dev/opencue/rqd-outline
         name: rqd
         securityContext:
           privileged: true

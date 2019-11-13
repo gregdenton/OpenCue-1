@@ -15,6 +15,8 @@
 #    limitations under the License.
 #
 
+echo "Waiting for Cuebot..."
+sleep 40
 
 systemctl restart rsyslog
 
