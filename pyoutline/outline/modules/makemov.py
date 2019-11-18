@@ -13,12 +13,7 @@ from outline.layer import Layer, Frame
 
 logger = logging.getLogger("outline.modules.shell")
 
-__all__ = ["Shell",
-           "ShellSequence",
-           "ShellCommand",
-           "ShellScript",
-           "shell",
-           "PyEval"]
+__all__ = ["MakeMov"]
 
 
 FFMPEG_CMD = 'ffmpeg -r 60 -f image2 -s 1920x1080 -start_number #IFRAME# -i ' + \
