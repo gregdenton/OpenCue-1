@@ -2,7 +2,7 @@ FROM opencue/rqd
 
 # Update [YOUR_BUCKET_NAME] with the name of your bucket in the following line:
 # This variable is referenced in rqd_startup.sh
-ENV GCS_FUSE_BUCKET pipeline-demo-files
+ENV GCS_FUSE_BUCKET [YOUR_BUCKET_NAME]
 
 
 # This is the GCS bucket mount point on your Render Host. /shots is correct for this tutorial. Referenced in rqd_startup.sh
@@ -95,8 +95,8 @@ RUN cd pycue && python setup.py install
 
 RUN cd pyoutline && python setup.py install
 
-RUN useradd gdenton; \
-    echo gdenton:gdentonpw |chpasswd;
+RUN useradd opencue_user; \
+    echo opencue_user:opencue_userpw |chpasswd;
 
 ENV CUEBOT_HOSTS cuebot
 

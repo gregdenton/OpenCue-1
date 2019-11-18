@@ -36,7 +36,7 @@ spec:
         resources: {}
       initContainers:
         - name: flyway
-          image: gcr.io/opencue-dev/opencue/flyway
+          image: gcr.io/[INSERT YOUR PROJECT]/opencue/flyway
           args:
             - /opt/scripts/migrate.sh
           env:

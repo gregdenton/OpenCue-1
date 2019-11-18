@@ -10,7 +10,7 @@ CMD = 'echo "Hello Pipeline Folks #IFRAME#"'
 job_name = 'pipeline-demo-001'
 shot_name = '010A_020'
 show_name = 'testing'
-user = 'gdenton'
+user = 'opencue_user'
 
 # Layer variables
 layer_name = 'silly-test'

@@ -20,7 +20,7 @@ WRAPPER_DIR = '/opt/opencue/demo_files'
 job_name = 'pipeline-demo-001'
 shot_name = '010A_020'
 show_name = 'testing'
-user = 'gdenton'
+user = 'opencue_user'
 outline = Outline(job_name, shot=shot_name, show=show_name, user=user)
 
 wrapper_path = os.path.join(WRAPPER_DIR, 'simple_dummy_wrapper')
