@@ -25,6 +25,8 @@ import com.imageworks.spcue.dispatcher.BookingQueue;
 import com.imageworks.spcue.dispatcher.DispatchQueue;
 import com.imageworks.spcue.dispatcher.DispatchSupport;
 import com.imageworks.spcue.dispatcher.HostReportQueue;
+import com.imageworks.spcue.grpc.cue.CueGetFarmStateRequest;
+import com.imageworks.spcue.grpc.cue.CueGetFarmStateResponse;
 import com.imageworks.spcue.grpc.cue.CueGetSystemStatsRequest;
 import com.imageworks.spcue.grpc.cue.CueGetSystemStatsResponse;
 import com.imageworks.spcue.grpc.cue.CueInterfaceGrpc;
@@ -41,8 +43,17 @@ public class CueStatic extends CueInterfaceGrpc.CueInterfaceImplBase {
     private DispatchSupport dispatchSupport;
 
     @Override
+    public void getFarmState(CueGetFarmStateRequest request,
+                             StreamObserver<CueGetFarmStateResponse> responseObserver) {
+        responseObserver.onNext(CueGetFarmStateResponse.newBuilder()
+                .build());
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
     public void getSystemStats(CueGetSystemStatsRequest request,
-                               StreamObserver<CueGetSystemStatsResponse> responseObserver) {
+                               StreamObserver<CueGetFarmStateResponse> responseObserver) {
         SystemStats stats = SystemStats.newBuilder()
                 .setDispatchThreads(dispatchQueue.getActiveThreadCount())
                 .setDispatchWaiting(dispatchQueue.getWaitingCount())

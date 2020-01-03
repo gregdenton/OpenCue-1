@@ -200,7 +200,7 @@
     <property name="adminManager" ref="adminManager"/>
     <property name="jobManager" ref="jobManager"/>
     <property name="emailSupport" ref="emailSupport"/>
-    <property name="jmsMover" ref="jmsMover"/>
+<!--    <property name="jmsMover" ref="jmsMover"/>-->
     <property name="localBookingSupport" ref="localBookingSupport" />
   </bean>
 
@@ -312,7 +312,7 @@
     <property name="dispatcher" ref="dispatcher" />
     <property name="localDispatcher" ref="localDispatcher" />
     <property name="dispatchSupport" ref="dispatchSupport" />
-    <property name="jmsMover" ref="jmsMover"/>
+<!--    <property name="jmsMover" ref="jmsMover"/>-->
   </bean>
 
   <bean id="hostReportHandler" class="com.imageworks.spcue.dispatcher.HostReportHandler" destroy-method="shutdown">

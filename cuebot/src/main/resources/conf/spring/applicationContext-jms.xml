@@ -21,30 +21,30 @@
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-  <bean id="jmsFactory"
-    class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
-    <property name="connectionFactory">
-      <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="failover:(tcp://mq1:61616,tcp://mq2:61616)?maxReconnectAttempts=1&amp;maxReconnectDelay=10"/>
-      </bean>
-    </property>
-  </bean>
+<!--  <bean id="jmsFactory"-->
+<!--    class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">-->
+<!--    <property name="connectionFactory">-->
+<!--      <bean class="org.apache.activemq.ActiveMQConnectionFactory">-->
+<!--        <property name="brokerURL" value="failover:(tcp://mq1:61616,tcp://mq2:61616)?maxReconnectAttempts=1&amp;maxReconnectDelay=10"/>-->
+<!--      </bean>-->
+<!--    </property>-->
+<!--  </bean>-->
 
-  <bean id="jmsTemplate"
-    class="org.springframework.jms.core.JmsTemplate">
-    <property name="connectionFactory">
-      <ref bean="jmsFactory"/>
-    </property>
-  </bean>
+<!--  <bean id="jmsTemplate"-->
+<!--    class="org.springframework.jms.core.JmsTemplate">-->
+<!--    <property name="connectionFactory">-->
+<!--      <ref bean="jmsFactory"/>-->
+<!--    </property>-->
+<!--  </bean>-->
 
-  <bean id="jobTopic" class="org.apache.activemq.command.ActiveMQTopic"
-    autowire="constructor">
-    <constructor-arg value="cue.job" />
-  </bean>
+<!--  <bean id="jobTopic" class="org.apache.activemq.command.ActiveMQTopic"-->
+<!--    autowire="constructor">-->
+<!--    <constructor-arg value="cue.job" />-->
+<!--  </bean>-->
 
-  <bean id="jmsMover" class="com.imageworks.spcue.service.JmsMover" destroy-method="shutdown">
-    <property name="topic" ref="jobTopic" />
-    <property name="template" ref="jmsTemplate" />
-  </bean>
+<!--  <bean id="jmsMover" class="com.imageworks.spcue.service.JmsMover" destroy-method="shutdown">-->
+<!--    <property name="topic" ref="jobTopic" />-->
+<!--    <property name="template" ref="jmsTemplate" />-->
+<!--  </bean>-->
 </beans>
 
